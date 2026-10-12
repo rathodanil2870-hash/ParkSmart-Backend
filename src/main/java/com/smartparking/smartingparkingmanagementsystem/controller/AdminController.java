@@ -1,7 +1,7 @@
 package com.smartparking.smartingparkingmanagementsystem.controller;
 
 import com.smartparking.smartingparkingmanagementsystem.entity.Admin;
-import com.smartparking.smartingparkingmanagementsystem.repository.AdminRepository;
+import com.smartparking.smartingparkingmanagementsystem.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/api/admins")
 public class AdminController {
 
-    private final AdminRepository adminRepository;
+    private final AdminService adminService;
 
-    public AdminController(AdminRepository adminRepository) {
-        this.adminRepository = adminRepository;
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
     }
 
     @GetMapping
     public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
+        return adminService.getAllAdmins();
     }
 
     @PostMapping
     public Admin createAdmin(@RequestBody Admin admin) {
-        return adminRepository.save(admin);
+        return adminService.createAdmin(admin);
     }
 }

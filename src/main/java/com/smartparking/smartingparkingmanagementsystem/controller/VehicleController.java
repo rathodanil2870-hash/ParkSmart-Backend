@@ -1,7 +1,7 @@
 package com.smartparking.smartingparkingmanagementsystem.controller;
 
 import com.smartparking.smartingparkingmanagementsystem.entity.Vehicle;
-import com.smartparking.smartingparkingmanagementsystem.repository.VehicleRepository;
+import com.smartparking.smartingparkingmanagementsystem.service.VehicleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/api/vehicles")
 public class VehicleController {
 
-    private final VehicleRepository vehicleRepository;
+    private final VehicleService vehicleService;
 
-    public VehicleController(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
 
     @GetMapping
     public List<Vehicle> getAllVehicles() {
-        return vehicleRepository.findAll();
+        return vehicleService.getAllVehicles();
     }
 
     @PostMapping
     public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
+        return vehicleService.createVehicle(vehicle);
     }
 }

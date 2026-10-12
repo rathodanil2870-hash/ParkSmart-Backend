@@ -1,7 +1,7 @@
 package com.smartparking.smartingparkingmanagementsystem.controller;
 
 import com.smartparking.smartingparkingmanagementsystem.entity.Operator;
-import com.smartparking.smartingparkingmanagementsystem.repository.OperatorRepository;
+import com.smartparking.smartingparkingmanagementsystem.service.OperatorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/api/operators")
 public class OperatorController {
 
-    private final OperatorRepository operatorRepository;
+    private final OperatorService operatorService;
 
-    public OperatorController(OperatorRepository operatorRepository) {
-        this.operatorRepository = operatorRepository;
+    public OperatorController(OperatorService operatorService) {
+        this.operatorService = operatorService;
     }
 
     @GetMapping
     public List<Operator> getAllOperators() {
-        return operatorRepository.findAll();
+        return operatorService.getAllOperators();
     }
 
     @PostMapping
     public Operator createOperator(@RequestBody Operator operator) {
-        return operatorRepository.save(operator);
+        return operatorService.createOperator(operator);
     }
 }

@@ -1,7 +1,7 @@
 package com.smartparking.smartingparkingmanagementsystem.controller;
 
 import com.smartparking.smartingparkingmanagementsystem.entity.ParkingSlot;
-import com.smartparking.smartingparkingmanagementsystem.repository.ParkingSlotRepository;
+import com.smartparking.smartingparkingmanagementsystem.service.ParkingSlotService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
 @RequestMapping("/api/slots")
 public class ParkingSlotController {
 
-    private final ParkingSlotRepository parkingSlotRepository;
+    private final ParkingSlotService parkingSlotService;
 
-    public ParkingSlotController(ParkingSlotRepository parkingSlotRepository) {
-        this.parkingSlotRepository = parkingSlotRepository;
+    public ParkingSlotController(ParkingSlotService parkingSlotService) {
+        this.parkingSlotService = parkingSlotService;
     }
 
     @GetMapping
     public List<ParkingSlot> getAllSlots() {
-        return parkingSlotRepository.findAll();
+        return parkingSlotService.getAllSlots();
     }
 
     @PostMapping
     public ParkingSlot createSlot(@RequestBody ParkingSlot slot) {
-        return parkingSlotRepository.save(slot);
+        return parkingSlotService.createSlot(slot);
     }
 }
